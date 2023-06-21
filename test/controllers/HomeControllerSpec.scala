@@ -41,5 +41,14 @@ class HomeControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting
       contentType(home) mustBe Some("text/html")
       contentAsString(home) must include ("Welcome to Play")
     }
+
+    "render a page that prints the sum of two numbers" in {
+      val request = FakeRequest(GET, "/sum/13/4")
+      val sumOfNumbers = route(app, request).get
+
+      status(sumOfNumbers) mustBe OK
+      contentType(sumOfNumbers) mustBe Some("text/html")
+      contentAsString(sumOfNumbers) must include ("The sum is 17!")
+    }
   }
 }
